@@ -1,0 +1,321 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package standardlize;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+
+/**
+ *
+ * @author VS9 X64Bit
+ */
+public class Demo extends javax.swing.JFrame {
+    String input4share;
+    int inputnumber;
+    String CrackGroup;
+    boolean addcrack;
+    // Standardlize the INPUT-OUTPUT
+    public static String STANDARDLIZE(String s){
+        while(s.charAt(0)==' '){
+            s=s.substring(1);
+        }
+        return s;
+    }
+    
+    public static String HANDLE4SHARE(String s,JRootPane rootPane) throws IOException{
+       
+       
+        return s;
+        
+    }
+    /**
+     * Creates new form Demo
+     */
+    public Demo() {
+        super("LINKNEVERDIE TOOLS");
+        initComponents();
+        btngenerate.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // INPUT
+                inputnumber = Integer.valueOf(txtlink.getText());
+                CrackGroup  = txtcrack.getText();
+                input4share = txt4share.getText();
+                addcrack = checkbox.isSelected();
+              
+                if(!input4share.isEmpty() && !input4share.contains("4share.vn")){
+                    JOptionPane.showMessageDialog(rootPane,"Phải nhập link Folder 4share");
+                    return;
+                }
+                // HANDLE THE MEGA AND GOOGLE OUTPUT;
+                StringBuilder outputCrackGroup = new StringBuilder("<p style=\"text-align: center;\"><strong><span style=\"font-size: 20px;\">"
+                         +"BẢN CRACK "+ CrackGroup + "</span></strong></p>");
+                
+                String outputGM=outputCrackGroup.toString() +"\n"; 
+                String outputCRACK = "<p style=\"text-align: center;\"><a =\"\"=\"\" href=\" \" target=\"_blank\"><strong><span style=\"font-size: 20px;\">CRACK</span></strong></a></p>";
+                if(inputnumber == 1)
+                    outputGM += "<p style=\"text-align: center;\"><strong><span style=\"font-size: 20px;\">DOWNLOAD</span></strong></p>";
+                else{
+                for(int i = 0;i<inputnumber;i++){
+                    outputGM +="<p style=\"text-align: center;\"><a =\"\"=\"\" href=\" \" target=\"_blank\"><strong><span style=\"font-size: 20px;\">"+"PART "+(i+1)+"</span></strong></a></p>" +"\n";
+                }
+                if(addcrack)
+                    outputGM +=outputCRACK;
+                    }
+                outputg.setText(outputGM);
+                outputm.setText(outputGM);
+                //HANDLE 4SHAREVN OUTPUT
+        
+       URL url;
+       BufferedReader br = null;
+       if(input4share.isEmpty()){
+           return;
+       }
+      try {
+        url = new URL(input4share);
+	URLConnection conn = url.openConnection();
+	 br  = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	} catch (IOException e1) {
+	// TODO Auto-generated catch block
+	JOptionPane.showMessageDialog(rootPane,"URL Không hợp lệ hoặc có vấn đề khi kết nối với LINK, vui lòng thử lại");
+        return;
+	}		
+        String inputLine;
+	String x ="";
+	try {
+	    while((inputLine=br.readLine())!=null){
+            if(inputLine.contains("style="+"'"+"margin-top: 10px;margin-left: 20px; " +
+            "border: 1px solid #ccc; padding: 8px; display: none"+"'"+">")){		
+            x = inputLine.replace("style="+"'"+"margin-top: 10px;margin-left:" +
+            "20px; border: 1px solid #ccc; padding: 8px; display: none"+"'"+">","");
+            break;
+		}	
+		}
+		} catch (IOException e1) {
+	// TODO Auto-generated catch block
+	e1.printStackTrace();
+		}
+	String parts[] = x.replace("</div>        </div>","").split("  <br/>");
+        String[] result =new String[parts.length];
+	String aaa=outputCrackGroup.toString() +"\n"; 
+	parts[0] = STANDARDLIZE(parts[0].replace("               style='margin-top: 10px;margin-left: 20px; border: 1px solid #ccc; padding: 8px; display: none'> ", ""));
+	for(int i=1;i<=parts.length-1;i++){
+		aaa +="<p style=\"text-align: center;\"><a href=\""+parts[i-1]+"\"target=\"_blank\">" +
+		"<strong><span style=\"font-size: 20px;\">PART"+i+"</span></strong></a></p>"+"\n";					
+				} 
+        output4.setText(aaa);
+      
+            }
+        });
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jScrollBar1 = new javax.swing.JScrollBar();
+        txtcrack = new javax.swing.JTextField();
+        txtlink = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btngenerate = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txt4share = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        outputg = new javax.swing.JTextArea();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        outputm = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        output4 = new javax.swing.JTextArea();
+        checkbox = new javax.swing.JCheckBox();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Bản CRACK :");
+
+        jLabel2.setText("Số Link :");
+
+        btngenerate.setText("GENERATE");
+
+        jLabel3.setText("Link 4share :");
+
+        jLabel4.setText("GOOGLE");
+
+        outputg.setColumns(20);
+        outputg.setRows(5);
+        jScrollPane2.setViewportView(outputg);
+
+        jLabel5.setText("MEGA");
+
+        outputm.setColumns(20);
+        outputm.setRows(5);
+        jScrollPane3.setViewportView(outputm);
+
+        jLabel6.setText("4SHAREVN");
+
+        output4.setColumns(20);
+        output4.setRows(5);
+        jScrollPane4.setViewportView(output4);
+
+        checkbox.setText("Thêm mục CRACK");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3)
+            .addComponent(jScrollPane4)
+            .addComponent(jScrollPane2)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt4share, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtlink, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtcrack, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(checkbox)
+                                .addGap(30, 30, 30))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btngenerate)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel4))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jLabel5)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtcrack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(checkbox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtlink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt4share, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addComponent(btngenerate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addGap(1, 1, 1)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>                        
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Demo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Demo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Demo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Demo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        Demo d = new Demo();
+        d.setVisible(true);
+        d.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton btngenerate;
+    private javax.swing.JCheckBox checkbox;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea output4;
+    private javax.swing.JTextArea outputg;
+    private javax.swing.JTextArea outputm;
+    private javax.swing.JTextField txt4share;
+    private javax.swing.JTextField txtcrack;
+    private javax.swing.JTextField txtlink;
+    // End of variables declaration                   
+}
